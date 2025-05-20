@@ -37,6 +37,9 @@ func main() {
 	e.GET("/", healthHandler.HealthCheck)
 	e.GET("/products", productHandler.GetProducts)
 	e.GET("/products/:id", productHandler.GetProduct)
+	e.POST("/products", productHandler.CreateProduct) //create POST
+	e.PUT("/products/:id", productHandler.UpdateProduct) //update PUT
+	e.DELETE("/products/:id", productHandler.DeleteProduct) //delete DELETE
 	// e.GET("/orders", orderHandler.GetOrders)
 
 	// サーバー起動
