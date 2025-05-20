@@ -31,3 +31,5 @@ func (r *ProductRepository) GetProductByID(id uint) (*domain.Product, error) {
 	}
 	return &product, nil
 }
+
+

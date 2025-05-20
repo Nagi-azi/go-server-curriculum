@@ -6,7 +6,7 @@ import (
 
 	"go-server-curriculum/usecase"
 
-	"github.com/gorilla/mux"
+	// "github.com/gorilla/mux"
 	"github.com/labstack/echo/v4"
 )
 
@@ -30,7 +30,7 @@ func (h *ProductHandler) GetProducts(c echo.Context) error {
 
 // GetProduct はIDで商品を取得
 func (h *ProductHandler) GetProduct(c echo.Context) error {
-	idParam := mux.Vars(c.Request())["id"]
+	idParam := c.Param("id")
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid product ID"})
