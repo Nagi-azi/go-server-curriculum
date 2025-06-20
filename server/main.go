@@ -21,26 +21,34 @@ func main() {
 
 	// // リポジトリ初期化
 	productRepo := repository.NewProductRepository(db)
-	// orderRepo := repository.NewOrderRepository(db)
+	orderRepo := repository.NewOrderRepository(db)
 
 	// // ユースケース初期化
 	productUsecase := usecase.NewProductUsecase(productRepo)
-	// orderUsecase := usecase.NewOrderUsecase(orderRepo)
+	orderUsecase := usecase.NewOrderUsecase(orderRepo)
 
 	// // ハンドラー初期化
 	healthHandler := handler.NewHealthHandler()
 	productHandler := handler.NewProductHandler(productUsecase)
-	// orderHandler := handler.NewOrderHandler(orderUsecase)
+	orderHandler := handler.NewOrderHandler(orderUsecase)
 
 	// Echoルーター設定
 	e := echo.New()
 	e.GET("/", healthHandler.HealthCheck)
+
+	// product
 	e.GET("/products", productHandler.GetProducts)
 	e.GET("/products/:id", productHandler.GetProduct)
 	e.POST("/products", productHandler.CreateProduct) //create POST
 	e.PUT("/products/:id", productHandler.UpdateProduct) //update PUT
 	e.DELETE("/products/:id", productHandler.DeleteProduct) //delete DELETE
-	// e.GET("/orders", orderHandler.GetOrders)
+
+	// order
+	e.GET("/orders", orderHandler.GetOrders)
+	e.GET("/orders/:id", orderHandler.GetOrder)
+	e.POST("/orders", orderHandler.CreateOrder)// create POST
+	e.PUT("/orders/:id", orderHandler.UpdateOrder) // update PUT
+	e.DELETE("/orders/:id", orderHandler.DeleteOrder) // delete DELETE
 
 	// サーバー起動
 	log.Println("Server running on port 8080")
