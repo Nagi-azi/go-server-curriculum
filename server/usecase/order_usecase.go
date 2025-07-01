@@ -33,6 +33,7 @@ func (u *OrderUsecase) UpdateOrder(id uint, order *domain.Order) error {
 
 	newOrder.ProductID = order.ProductID
 	newOrder.Quantity = order.Quantity
+	newOrder.CustomerID = order.CustomerID
 
 	err = u.orderRepo.UpdateOrder(newOrder)
 	if err != nil {
